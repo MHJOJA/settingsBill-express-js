@@ -6,7 +6,11 @@ const SettingsBill = require('./settingBill')
 let app = express();
 const settingsBill = SettingsBill();
 
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main', 
+  layoutsDir : './views/layouts'
+}));
+
 app.set('view engine', 'handlebars');
 
 app.use(express.static('public'))
@@ -20,24 +24,27 @@ app.use(bodyParser.json())
 
 app.get('/', function(req, res){
 
-  res.render('index')
-})
+  res.render('index', {settings : settingsBill.getSettings()})
+  })
 
 app.post('/settings', function (req,res){
 
   settingsBill.setSettings({
     callCost: req.body.callCost,
     smsCost : req.body.smsCost,
-    warningLevel: req.body.warningLevel,
+    warningLevel: req.body.warningLevel, 
     criticalLevel: req.body.criticalLevel
   })
 
-  console.log(settingsBill.getSettings());
+ // console.log(settingsBill.getSettings());
   res.redirect('/');
 
 })
 
 app.post('/action', function(req,res){
+  console.log(req.body.actionType)
+  res.redirect('/');
+
 
 })
 

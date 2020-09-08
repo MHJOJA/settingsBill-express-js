@@ -1,9 +1,9 @@
 module.exports = function (value){
 
-    var theCallCost = 0;
-    var theSmsCost = 0;
-    var theWarningLevel = 0;
-    var theCriticalLevel = 0;
+    var callCost = 0;
+    var smsCost = 0;
+    var warningLevel = 0;
+    var criticalLevel = 0;
     
     
     
