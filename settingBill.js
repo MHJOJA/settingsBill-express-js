@@ -58,29 +58,29 @@ module.exports = function (value){
         }
     }
     
-    // function recordAction (action){
-    //     let cost = 0;
-    //     if (action=== 'sms'){
-    //         cost = smsCost;
-    //     }
-    //     else if (action === 'call'){
-    //         cost = callCost
-    //     }
-    // }
+    function recordAction (action){
+        let cost = 0;
+        if (action=== 'sms'){
+            cost = smsCost;
+        }
+        else if (action === 'call'){
+            cost = callCost
+        }
+    }
 
-    // actionList.Push({
-    //     type : action,
-    //     cost,
-    //     timestamp : new Date()
-    // })
+    actionList.Push({
+        type : action,
+        cost,
+        timestamp : new Date()
+    })
     
-    
+    s
     
         return {
             getCallCost,
             setCallCost,
             setSmsCost,
-           // recordAction,
+            recordAction,
             getSmsCost,
             setWarningLevel,
             getWarningLevel,
