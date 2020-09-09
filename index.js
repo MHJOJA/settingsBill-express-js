@@ -4,13 +4,11 @@ const bodyParser = require('body-parser')
 const SettingsBill = require('./settingBill')
 
 let app = express();
+
 const settingsBill = SettingsBill();
+app.use(express.static('public'))
 
-app.engine('handlebars', exphbs({
-  defaultLayout: 'main', 
-  layoutsDir : './views/layouts'
-}));
-
+app.engine('handlebars', exphbs({layoutsDir: './views/layouts/'}));
 app.set('view engine', 'handlebars');
 
 app.use(express.static('public'))
@@ -20,35 +18,39 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-
-
 app.get('/', function(req, res){
 
-  res.render('index', {settings : settingsBill.getSettings()})
+  res.render('index',{
+    settings:settingsBill.getSettings(),
+    totals: settingsBill.totals()
+  
   })
+})
 
 app.post('/settings', function (req,res){
 
   settingsBill.setSettings({
     callCost: req.body.callCost,
     smsCost : req.body.smsCost,
-    warningLevel: req.body.warningLevel, 
+    warningLevel: req.body.warningLevel,
     criticalLevel: req.body.criticalLevel
   })
 
- // console.log(settingsBill.getSettings());
+  console.log(settingsBill.getSettings());
   res.redirect('/');
 
-})
+});
 
 app.post('/action', function(req,res){
-  console.log(req.body.actionType)
+  
+  settingsBill.recordAction(req.body.actionType)
   res.redirect('/');
 
 
 })
 
 app.get('/actions', function(req,res){
+  res.render('/actions')
 
 })
 app.get('/actions/:type',function(req,res){
