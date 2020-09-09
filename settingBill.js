@@ -66,15 +66,16 @@ module.exports = function (value){
         else if (action === 'call'){
             cost = callCost
         }
+        actionList.push({
+            type : action,
+            cost,
+            timestamp : new Date()
+        })
     }
 
-    actionList.Push({
-        type : action,
-        cost,
-        timestamp : new Date()
-    })
+   
     
-    s
+    
     
         return {
             getCallCost,
