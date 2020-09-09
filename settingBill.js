@@ -35,8 +35,12 @@ module.exports = function (value){
     
     
     function setCriticalLevel (criticalLevel){
-        theCriticalLevel = criticalLevel;
+        theCriticalLevel = criticalLevel;;
     }
+    function getCriticalLevel (criticalLevel){
+        return theCriticalLevel
+    }
+    
 
     function setSettings (settings){
        
@@ -54,9 +58,21 @@ module.exports = function (value){
         }
     }
     
-    function getCriticalLevel (criticalLevel){
-        return theCriticalLevel
-    }
+    // function recordAction (action){
+    //     let cost = 0;
+    //     if (action=== 'sms'){
+    //         cost = smsCost;
+    //     }
+    //     else if (action === 'call'){
+    //         cost = callCost
+    //     }
+    // }
+
+    // actionList.Push({
+    //     type : action,
+    //     cost,
+    //     timestamp : new Date()
+    // })
     
     
     
@@ -64,6 +80,7 @@ module.exports = function (value){
             getCallCost,
             setCallCost,
             setSmsCost,
+           // recordAction,
             getSmsCost,
             setWarningLevel,
             getWarningLevel,
