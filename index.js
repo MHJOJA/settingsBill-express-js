@@ -42,18 +42,27 @@ app.post('/settings', function (req,res){
 });
 
 app.post('/action', function(req,res){
+
+ // console.log(req.body.actionType)
+
   
   settingsBill.recordAction(req.body.actionType)
+  console.log(  settingsBill.totals())
+
   res.redirect('/');
 
 
 })
 
 app.get('/actions', function(req,res){
-  res.render('/actions')
+  res.render('actions', { actions : settingsBill.actions() })
 
 })
-app.get('/actions/:type',function(req,res){
+app.get('/actions/:actionType',function(req,res){
+  
+  const actionType = req.params.actionType;
+  res.render('actions', { actions : settingsBill.actionFor(action) })
+
 
 })
 
