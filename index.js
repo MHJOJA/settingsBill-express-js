@@ -8,7 +8,7 @@ let app = express();
 const settingsBill = SettingsBill();
 app.use(express.static('public'))
 
-app.engine('handlebars', exphbs({layoutsDir: './views/layouts/'}));
+app.engine('handlebars', exphbs({layoutsDir: './views/layouts'}));
 app.set('view engine', 'handlebars');
 
 app.use(express.static('public'))
@@ -20,9 +20,12 @@ app.use(bodyParser.json())
 
 app.get('/', function(req, res){
 
+
+  console.log(settingsBill.colorFun())
   res.render('index',{
     settings:settingsBill.getSettings(),
-    totals: settingsBill.totals()
+    totals: settingsBill.totals(),
+    color: settingsBill.colorFun()
   
   })
 })
