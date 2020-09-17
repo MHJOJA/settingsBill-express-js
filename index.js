@@ -2,6 +2,8 @@ const express = require('express')
 const exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser')
 const SettingsBill = require('./settingBill')
+const moment = require('moment')
+console.log(moment)
 
 let app = express();
 
@@ -10,7 +12,6 @@ app.use(express.static('public'))
 
 app.engine('handlebars', exphbs({layoutsDir: './views/layouts'}));
 app.set('view engine', 'handlebars');
-
 app.use(express.static('public'))
 
 // parse application/x-www-form-urlencoded
