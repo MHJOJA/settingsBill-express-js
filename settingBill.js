@@ -8,7 +8,7 @@ module.exports = function SettingsBill() {
     let actionList = [];
 
     function setSettings(settings) {
-        if(settings > 0){
+        if(settings){
         smsCost = Number(settings.smsCost);
         callCost = Number(settings.callCost);
         warningLevel = settings.warningLevel;
@@ -69,7 +69,7 @@ module.exports = function SettingsBill() {
 
     function getTotal(type) {
         let total = 0;
-        if(type){
+        
         // loop through all the entries in the action list 
         for (let index = 0; index < actionList.length; index++) {
             const action = actionList[index];
@@ -80,7 +80,7 @@ module.exports = function SettingsBill() {
             }
         }
         return total;
-    }
+
         // the short way using reduce and arrow functions
 
         // return actionList.reduce((total, action) => { 
