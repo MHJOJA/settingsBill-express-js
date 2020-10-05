@@ -8,11 +8,13 @@ module.exports = function SettingsBill() {
     let actionList = [];
 
     function setSettings(settings) {
+        if(settings > 0){
         smsCost = Number(settings.smsCost);
         callCost = Number(settings.callCost);
         warningLevel = settings.warningLevel;
         criticalLevel = settings.criticalLevel;
     }
+}
 
     function getSettings
         () {
@@ -29,10 +31,10 @@ module.exports = function SettingsBill() {
             if (!hasReachedCriticalLevel()) {
                 let cost = 0;
                 if (action === 'sms') {
-                    cost = smsCost;
+                    cost = Number(smsCost);
                 }
                 else if (action === 'call') {
-                    cost = callCost;
+                    cost = Number(callCost);
                 }
 
                 actionList.push({
@@ -50,6 +52,7 @@ module.exports = function SettingsBill() {
     function actionsFor(type) {
         const filteredActions = [];
 
+
         // loop through all the entries in the action list 
         for (let index = 0; index < actionList.length; index++) {
             const action = actionList[index];
@@ -61,23 +64,23 @@ module.exports = function SettingsBill() {
         }
 
         return filteredActions;
-
-        // return actionList.filter((action) => action.type === type);
     }
+
 
     function getTotal(type) {
         let total = 0;
+        if(type){
         // loop through all the entries in the action list 
         for (let index = 0; index < actionList.length; index++) {
             const action = actionList[index];
             // check this is the type we are doing the total for 
             if (action.type === type) {
                 // if it is add the total to the list
-                total += action.cost;
+                total += Number(action.cost);
             }
         }
         return total;
-
+    }
         // the short way using reduce and arrow functions
 
         // return actionList.reduce((total, action) => { 
@@ -91,12 +94,12 @@ module.exports = function SettingsBill() {
     }
 
     function totals() {
-        let smsTotal = getTotal('sms').toFixed(2)
-        let callTotal = getTotal('call').toFixed(2)
+        let smsTotal = Number(getTotal('sms')).toFixed(2)
+        let callTotal = Number(getTotal('call')).toFixed(2)
         return {
             smsTotal,
             callTotal,
-            grandTotal: grandTotal().toFixed(2)
+            grandTotal: Number(grandTotal()).toFixed(2)
         }
     }
 
